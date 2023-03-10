@@ -12,7 +12,7 @@ router.use('/courses', require('./courses.routes'));
 
 router.use('/teachers', require('./teachers.routes'))
 router.use('/profile', require('./profile.routes'))
-router.use("/favoriteTeacher", require('./favoriteTeacher.routes'))
-// router.use("/favoriteCourses", require('./favoriteCourses.routes'))
+router.use("/favoriteTeacher", require('./favoriteTeachers.routes'))
+router.use("/favoriteCourses", require('./favoriteCourses.routes'))
 
 module.exports = router;
