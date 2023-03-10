@@ -1,7 +1,9 @@
 const router = require("express").Router();
 const Course = require("./../models/Course.model");
 const User = require("./../models/User.model");
+
 const isAuthenticated = require("./../middlewares/isAuthenticated");
+
 router.put("/:id", isAuthenticated, async (req, res) => {
   try {
     const updateUser = await User.findByIdAndUpdate(

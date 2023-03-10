@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const User = require("./../models/User.model");
 const Course = require("./../models/Course.model");
 
+
 // Find all the teachers
 router.get("/", async (req, res, next) => {
   try {
@@ -56,11 +57,6 @@ router.post("/courses", async (req, res, next) => {
 
 router.delete("/:id", async (req, res, next) => {
   if (req.session.currentUser === teacher)
-    try {
-      await Course.findByIdAndDelete(req.params.id);
-    } catch (error) {
-      next(error);
-    }
-});
 
 module.exports = router;
+
