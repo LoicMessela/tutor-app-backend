@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const User = require('./../models/User.model');
 const Course = require('./../models/Course.model');
 
+
 // Find all the teachers
 router.get('/teachers', async (req, res, next) => {
     try {
@@ -19,7 +20,7 @@ router.get('/teachers', async (req, res, next) => {
 })
 
 // Find a teacher in particular
-router.get('/teachers/:id', async (res, res, next) => {
+router.get('/teachers/:id', async (req, res, next) => {
     try {
         const oneTeacher = await User.findOne({ _id: req.params.id, isTeacher: true })
         res.json(oneTeacher)
@@ -40,8 +41,7 @@ router.get('/teachers/:id/courses', async (req, res, next) => {
 
 router.post('/teachers/courses', async (req, res, next) => {
     const {
-        title, description, subject, teacher
-    } = req.body;
+        title, description, subject, teacher } = req.body;
     try {
         const createdCourses = await Course.create({
             title, description, subject, teacher: req.session.currentUser._id
@@ -52,15 +52,15 @@ router.post('/teachers/courses', async (req, res, next) => {
     }
 })
 
-router.delete('/:id', async (req, res, next) => {
-    if (req.session.currentUser === teacher)
-        try {
+// router.delete('/:id', async (req, res, next) => {
+//     if (req.session.currentUser === teacher)
+//         try {
 
-            await Course.findByIdAndDelete(req.params.id)
-        } catch (error) {
-            next(error)
-        }
-})
+//             await Course.findByIdAndDelete(req.params.id)
+//         } catch (error) {
+//             next(error)
+//         }
+// })
 
 
 module.exports = router;
