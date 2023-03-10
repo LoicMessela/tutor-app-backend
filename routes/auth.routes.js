@@ -9,9 +9,9 @@ const User = require("./../models/User.model.js");
  */
 
 router.post("/signup", async (req, res, next) => {
-  const { username, password } = req.body;
+  const { username, password, email, telephoneNumber, bio, city } = req.body;
 
-  if (!username || !password) {
+  if (!username || !password || !email || !telephoneNumber || !bio || !city) {
     return res
       .status(400)
       .json({ message: "Please provide username and password" });
