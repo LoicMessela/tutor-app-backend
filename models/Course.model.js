@@ -10,6 +10,7 @@ const courseSchema = new Schema(
     description: {
       type: String,
       maxLength: 500,
+      required: [true, "description is required"],
     },
     subject: {
       type: String,

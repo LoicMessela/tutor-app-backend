@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 
 // TODO: Please make sure you edit the User model to whatever makes sense in this case
-const favorateCourseSchema = new Schema(
+const favoriteCourseSchema = new Schema(
   {
     user: {
       type: Schema.Types.ObjectId,
@@ -20,6 +20,6 @@ const favorateCourseSchema = new Schema(
   }
 );
 
-const FavorateCourse = model("favorateCourse", favorateCourseSchema);
+const FavoriteCourse = model("FavoriteCourse", favoriteCourseSchema);
 
-module.exports = FavorateCourse;
+module.exports = FavoriteCourse;

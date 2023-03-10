@@ -19,6 +19,6 @@ const favoriteTeacherSchema = new Schema(
   }
 );
 
-const FavoriteTeacher = model("favoriteTeacher", favoriteTeacherSchema);
+const FavoriteTeacher = model("FavoriteTeacher", favoriteTeacherSchema);
 
 module.exports = FavoriteTeacher;
