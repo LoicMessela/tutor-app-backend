@@ -58,3 +58,4 @@ router.post("/:id/favoriteCourses/remove", isAuthenticated, async (req, res, nex
 });
 
 module.exports = router;
+

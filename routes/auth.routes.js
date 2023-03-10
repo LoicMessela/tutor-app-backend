@@ -9,7 +9,9 @@ const User = require("./../models/User.model.js");
  */
 
 router.post("/signup", async (req, res, next) => {
-  const { username, password, email, telephoneNumber, bio, city } = req.body;
+  const { username, password, email, telephoneNumber, bio, city, isTeacher } =
+    req.body;
+  console.log(req.body);
 
   if (!username || !password || !email || !telephoneNumber || !bio || !city) {
     return res
@@ -31,6 +33,11 @@ router.post("/signup", async (req, res, next) => {
     await User.create({
       username,
       password: hashedPassword,
+      bio,
+      email,
+      city,
+      telephoneNumber,
+      isTeacher,
     });
     return res.status(201).json({ message: "The user was created." });
   } catch (error) {
