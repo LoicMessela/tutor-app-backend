@@ -4,10 +4,10 @@ const User = require("./../models/User.model");
 
 const isAuthenticated = require("./../middlewares/isAuthenticated");
 
-router.put("/:id", isAuthenticated, async (req, res) => {
+router.put("/", isAuthenticated, async (req, res) => {
   try {
     const updateUser = await User.findByIdAndUpdate(
-      req.params.id,
+      req.user.id,
       { $set: req.body },
       { new: true }
     );
@@ -24,9 +24,9 @@ router.get("/:id", isAuthenticated, async (req, res) => {
     next(err);
   }
 });
-router.delete("/:id", isAuthenticated, async (req, res) => {
+router.delete("/", isAuthenticated, async (req, res) => {
   try {
-    await User.findByIdAndDelete(req.params.id);
+    await User.findByIdAndDelete(req.user.id);
     res.status(200).json("User Profile has been deleted");
   } catch (err) {
     next(err);

@@ -47,7 +47,7 @@ router.post("/courses", async (req, res, next) => {
       title,
       description,
       subject,
-      teacher: req.session.currentUser._id,
+      teacher: req.user._id,
     });
     res.status(201).json(createdCourses);
   } catch (error) {
@@ -56,7 +56,13 @@ router.post("/courses", async (req, res, next) => {
 });
 
 router.delete("/:id", async (req, res, next) => {
-  if (req.session.currentUser === teacher)
+  if (req.user._id === teacher)
+    try {
+      await Course.findByIdAndDelete(req.params.id);
+    } catch (error) {
+      next(error);
+    }
+});
 
 module.exports = router;
 
