@@ -14,7 +14,7 @@ router.post("/signup", async (req, res, next) => {
   if (!username || !password || !email || !telephoneNumber || !bio || !city) {
     return res
       .status(400)
-      .json({ message: "Please provide username and password" });
+      .json({ message: "Please provide the mandatory fields" });
   }
 
   try {
