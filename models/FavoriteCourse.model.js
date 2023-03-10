@@ -1,24 +1,25 @@
 const { Schema, model } = require("mongoose");
 
 // TODO: Please make sure you edit the User model to whatever makes sense in this case
-const favorateTeacherSchema = new Schema(
+const favoriteCourseSchema = new Schema(
   {
     user: {
       type: Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
-    teacher: {
+    course: {
       type: Schema.Types.ObjectId,
-      ref: "User",
+      ref: "Course",
       required: true,
     },
   },
   {
+    // this second object adds extra properties: `createdAt` and `updatedAt`
     timestamps: true,
   }
 );
 
-const FavorateTeacher = model("favorateTeacher", favorateTeacherSchema);
+const FavoriteCourse = model("FavoriteCourse", favoriteCourseSchema);
 
-module.exports = FavorateTeacher;
+module.exports = FavoriteCourse;
