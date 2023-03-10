@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const mongoose = require("mongoose");
-const FavoriteTeacher = require("./../models/FavoriteTeacher.model")
-const User = require('./../models/User.model')
+const FavoriteTeacher = require("../models/FavoriteTeacher.model")
+const User = require('../models/User.model')
 
 
 

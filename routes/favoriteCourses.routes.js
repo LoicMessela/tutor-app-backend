@@ -55,3 +55,5 @@ router.post("/:id/favoriteCourses/remove", async (req, res, next) => {
     next(error);
   }
 });
+
+module.exports = router;
