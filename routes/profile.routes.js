@@ -24,10 +24,10 @@ router.get("/:id", isAuthenticated, async (req, res) => {
     next(err);
   }
 });
-router.delete("/", isAuthenticated, async (req, res) => {
+router.delete("/:id", isAuthenticated, async (req, res) => {
   try {
     await User.findByIdAndDelete(req.user.id);
-    res.status(200).json("User Profile has been deleted");
+    res.status(204).json("User Profile has been deleted");
   } catch (err) {
     next(err);
   }
