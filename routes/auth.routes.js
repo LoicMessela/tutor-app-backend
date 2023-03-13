@@ -50,6 +50,7 @@ router.post("/signup", async (req, res, next) => {
 
 router.post("/login", async (req, res, next) => {
   const { username, password } = req.body;
+  console.log(req.body)
   if (!username || !password) {
     return res
       .status(400)

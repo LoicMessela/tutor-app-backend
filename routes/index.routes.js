@@ -8,11 +8,13 @@ router.get("/", (req, res, next) => {
 });
 
 router.use('/auth', require('./auth.routes'))
-router.use('/courses', require('./courses.routes'));
 
 router.use('/teachers', require('./teachers.routes'))
+
+router.use(isAuthenticated)
+router.use('/courses', require('./courses.routes'));
 router.use('/profile', require('./profile.routes'))
-router.use("/favoriteTeacher", require('./favoriteTeachers.routes'))
-router.use("/favoriteCourses", require('./favoriteCourses.routes'))
+router.use("/favorite-teacher", require('./favoriteTeachers.routes'))
+router.use("/favorite-courses", require('./favoriteCourses.routes'))
 
 module.exports = router;

@@ -60,8 +60,8 @@ router.get("/:id", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   try {
-    const { title, description, subject, teacher } = req.body;
-    const createdCourse = await Course.create({ title, description, subject, teacher });
+    const { title, description, subject } = req.body;
+    const createdCourse = await Course.create({ title, description, subject, teacher: req.user._id });
 
     res.status(201).json(createdCourse);
 
@@ -76,14 +76,14 @@ router.patch("/:id", async (req, res, next) => {
   try {
 
     const { id } = req.params;
-    const { title, description, subject, teacher } = req.body;
+    const { title, description, subject } = req.body;
 
-    const updatedCourse = await Course.findByIdAndUpdate(
+    const updatedCourse = await Course.findOneAndUpdate(
       {
-        id,
+        _id: id,
         teacher: req.user._id,
       },
-      { title, description, subject, teacher },
+      { title, description, subject },
       { new: true }
     );
 
