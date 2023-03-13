@@ -7,7 +7,7 @@ const User = require("../models/User.model");
 
 // GET Favorite Courses
 
-router.get("/favoriteCourses", async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     const favoriteCourses = await FavoriteCourse.find({
       user: req.user._id,
@@ -24,7 +24,7 @@ router.get("/favoriteCourses", async (req, res, next) => {
   }
 });
 
-router.post("/:id/favoriteCourses/add", async (req, res, next) => {
+router.post("/:id/favorite-courses/add", async (req, res, next) => {
   try {
     const foundCourse = await Course.findById(req.params.id);
     if (foundCourse) {
@@ -44,7 +44,7 @@ router.post("/:id/favoriteCourses/add", async (req, res, next) => {
   }
 });
 
-router.post("/:id/favoriteCourses/remove", isAuthenticated, async (req, res, next) => {
+router.post("/:id/favorite-courses/remove", isAuthenticated, async (req, res, next) => {
   try {
     removedCourse = await FavoriteCourse.findOneAndDelete({
       user: req.user._id,
