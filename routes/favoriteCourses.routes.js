@@ -24,8 +24,9 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.post("/:id/favorite-courses/add", async (req, res, next) => {
+router.post("/:id/add", async (req, res, next) => {
   try {
+    console.log("eheheh");
     const foundCourse = await Course.findById(req.params.id);
     if (foundCourse) {
       await FavoriteCourse.findOneAndUpdate(
@@ -44,7 +45,7 @@ router.post("/:id/favorite-courses/add", async (req, res, next) => {
   }
 });
 
-router.post("/:id/favorite-courses/remove", isAuthenticated, async (req, res, next) => {
+router.post("/:id/remove", isAuthenticated, async (req, res, next) => {
   try {
     removedCourse = await FavoriteCourse.findOneAndDelete({
       user: req.user._id,
@@ -58,4 +59,3 @@ router.post("/:id/favorite-courses/remove", isAuthenticated, async (req, res, ne
 });
 
 module.exports = router;
-
