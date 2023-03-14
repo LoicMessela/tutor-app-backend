@@ -42,6 +42,7 @@ router.post("/signup", async (req, res, next) => {
     return res.status(201).json({ message: "The user was created." });
   } catch (error) {
     // next(error)
+    console.log(error);
     return res
       .status(500)
       .json({ message: "Something went wrong during signup", error });
@@ -50,7 +51,7 @@ router.post("/signup", async (req, res, next) => {
 
 router.post("/login", async (req, res, next) => {
   const { username, password } = req.body;
-  console.log(req.body)
+  console.log(req.body);
   if (!username || !password) {
     return res
       .status(400)
