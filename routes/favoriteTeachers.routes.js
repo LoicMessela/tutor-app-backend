@@ -42,9 +42,9 @@ router.post("/:id/add", async (req, res, next) => {
 });
 router.post("/:id/remove", isAuthenticated, async (req, res, next) => {
   try {
-    removedTEacher = await FavoriteCourse.findOneAndDelete({
+    removedTeacher = await FavoriteTeacher.findOneAndDelete({
       user: req.user._id,
-      course: req.params._id,
+      teacher: req.params._id,
     });
 
     res.json(removedTeacher);
