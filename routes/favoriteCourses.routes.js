@@ -15,7 +15,7 @@ router.get("/", async (req, res, next) => {
 
     const allFavoriteCourses = favoriteCourses.map((bookmark) => {
       bookmark.course.isBookmarked = true;
-      return bookmark.course;
+      return { course: bookmark.course, id: bookmark._id };
     });
 
     res.json(allFavoriteCourses);
@@ -26,7 +26,7 @@ router.get("/", async (req, res, next) => {
 
 router.post("/:id/add", async (req, res, next) => {
   try {
-    console.log("eheheh");
+
     const foundCourse = await Course.findById(req.params.id);
     if (foundCourse) {
       await FavoriteCourse.findOneAndUpdate(
@@ -45,12 +45,10 @@ router.post("/:id/add", async (req, res, next) => {
   }
 });
 
-router.post("/:id/remove", isAuthenticated, async (req, res, next) => {
+router.delete("/:id/remove", isAuthenticated, async (req, res, next) => {
+  const { id } = req.params
   try {
-    removedCourse = await FavoriteCourse.findOneAndDelete({
-      user: req.user._id,
-      course: req.params._id,
-    });
+    removedCourse = await FavoriteCourse.findByIdAndDelete(id);
 
     res.json(removedCourse);
   } catch (error) {

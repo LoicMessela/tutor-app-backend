@@ -35,7 +35,7 @@ const courseSchema = new Schema(
     timestamps: true,
   }
 );
-
+// console.log(courseSchema.teacher.type)
 const Course = model("Course", courseSchema);
 
 module.exports = Course;
