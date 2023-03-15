@@ -7,9 +7,9 @@ const User = require("../models/User.model");
 
 // GET Courses
 
-router.get("/", async (req, res, next) => {
+
   const query = {
-    title: RegExp(req.query.title, "gi"),
+    title: RegExp(req.query.course, "gi"),
     subject: req.query.subject,
   };
   if (!query.title) {
@@ -37,7 +37,6 @@ router.get("/", async (req, res, next) => {
     });
 
     res.json(allCourses);
-
   } catch (error) {
     next(error);
   }
@@ -50,21 +49,26 @@ router.get("/:id", async (req, res, next) => {
     const oneCourse = await Course.findById(req.params.id);
 
     res.json({ oneCourse, message: "you got One course !" });
-
   } catch (error) {
     next(error);
   }
 });
 
 // Create a Course
+
 router.use(isTeacher)
-router.post("/", async (req, res, next) => {
+router.post("/add", async (req, res, next) => {
+
   try {
     const { title, description, subject } = req.body;
-    const createdCourse = await Course.create({ title, description, subject, teacher: req.user._id });
+    const createdCourse = await Course.create({
+      title,
+      description,
+      subject,
+      teacher: req.user._id,
+    });
 
     res.status(201).json(createdCourse);
-
   } catch (error) {
     next(error);
   }
@@ -74,8 +78,8 @@ router.post("/", async (req, res, next) => {
 
 router.patch("/:id", async (req, res, next) => {
   try {
-
     const { id } = req.params;
+    console.log("params", req.params);
     const { title, description, subject } = req.body;
 
     const updatedCourse = await Course.findOneAndUpdate(
@@ -88,12 +92,10 @@ router.patch("/:id", async (req, res, next) => {
     );
 
     res.status(202).json(updatedCourse);
-
   } catch (error) {
     next(error);
   }
 });
-
 
 // Delete a Course
 
@@ -105,11 +107,9 @@ router.delete("/:id", async (req, res, next) => {
     });
 
     res.sendStatus(204);
-
   } catch (error) {
     next(error);
   }
 });
 
 module.exports = router;
-
