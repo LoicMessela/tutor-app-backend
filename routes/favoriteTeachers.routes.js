@@ -7,7 +7,7 @@ const isAuthenticated = require("./../middlewares/isAuthenticated");
 router.get("/", isAuthenticated, async (req, res, next) => {
   try {
     const favTeacher = await FavoriteTeacher.find({
-      _id: req.user._id,
+      user: req.user._id,
     }).populate("teacher");
 
     const allFavoriteTeacher = favTeacher.map((bookmark) => {
@@ -40,13 +40,10 @@ router.post("/:id/add", async (req, res, next) => {
     next(error);
   }
 });
-router.post("/:id/remove", isAuthenticated, async (req, res, next) => {
+router.delete("/:id", isAuthenticated, async (req, res, next) => {
+  const { id } = req.params
   try {
-    removedTeacher = await FavoriteTeacher.findOneAndDelete({
-      user: req.user._id,
-      teacher: req.params._id,
-    });
-
+    removedTeacher = await FavoriteTeacher.findByIdAndDelete(id);
     res.json(removedTeacher);
   } catch (error) {
     next(error);
