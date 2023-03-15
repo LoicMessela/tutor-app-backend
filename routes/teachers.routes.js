@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 
 const User = require("./../models/User.model");
 const Course = require("./../models/Course.model");
+const isTeacher = require("../middlewares/isTeacher");
 
 
 // Find all the teachers
@@ -40,29 +41,31 @@ router.get("/:id/courses", async (req, res, next) => {
   }
 });
 
-router.post("/courses", async (req, res, next) => {
-  const { title, description, subject, teacher } = req.body;
-  try {
-    const createdCourses = await Course.create({
-      title,
-      description,
-      subject,
-      teacher: req.user._id,
-    });
-    res.status(201).json(createdCourses);
-  } catch (error) {
-    next(error);
-  }
-});
+// router.use(isTeacher)
 
-router.delete("/:id", async (req, res, next) => {
-  if (req.user._id === teacher)
-    try {
-      await Course.findByIdAndDelete(req.params.id);
-    } catch (error) {
-      next(error);
-    }
-});
+// router.post("/courses", async (req, res, next) => {
+//   const { title, description, subject } = req.body;
+//   try {
+//     const createdCourses = await Course.create({
+//       title,
+//       description,
+//       subject,
+//       teacher: req.user._id,
+//     });
+//     res.status(201).json(createdCourses);
+//   } catch (error) {
+//     next(error);
+//   }
+// });
+
+// router.delete("/:id", async (req, res, next) => {
+//   if (req.user._id === teacher)
+//     try {
+//       await Course.findByIdAndDelete(req.params.id);
+//     } catch (error) {
+//       next(error);
+//     }
+// });
 
 module.exports = router;
 

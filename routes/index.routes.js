@@ -9,9 +9,9 @@ router.get("/", (req, res, next) => {
 
 router.use("/auth", require("./auth.routes"));
 
-router.use("/teachers", require("./teachers.routes"));
 
 router.use(isAuthenticated);
+router.use("/teachers", require("./teachers.routes"));
 router.use("/courses", require("./courses.routes"));
 router.use("/profile", require("./profile.routes"));
 router.use("/favorite-teacher", require("./favoriteTeachers.routes"));

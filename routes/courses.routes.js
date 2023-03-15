@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const isAuthenticated = require("../middlewares/isAuthenticated");
+const isTeacher = require("../middlewares/isTeacher");
 const Course = require("../models/Course.model");
 const FavoriteCourse = require("../models/FavoriteCourse.model");
 const FavoriteTeacher = require("../models/FavoriteTeacher.model");
@@ -7,7 +7,7 @@ const User = require("../models/User.model");
 
 // GET Courses
 
-router.get("/", isAuthenticated, async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   const query = {
     title: RegExp(req.query.title, "gi"),
     subject: req.query.subject,
@@ -57,7 +57,7 @@ router.get("/:id", async (req, res, next) => {
 });
 
 // Create a Course
-
+router.use(isTeacher)
 router.post("/", async (req, res, next) => {
   try {
     const { title, description, subject } = req.body;
