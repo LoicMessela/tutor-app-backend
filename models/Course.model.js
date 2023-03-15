@@ -18,8 +18,8 @@ const courseSchema = new Schema(
       enum: [
         "Maths",
         "Physics",
-        "Computer Science",
-        "Physical Education",
+        "Computer_Science",
+        "Physical_Education",
         "History",
         "Chemistry",
         "Biology",
