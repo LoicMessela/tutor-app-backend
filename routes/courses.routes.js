@@ -7,7 +7,7 @@ const User = require("../models/User.model");
 
 // GET Courses
 
-
+router.get('/', async (req, res, next) => {
   const query = {
     title: RegExp(req.query.course, "gi"),
     subject: req.query.subject,
