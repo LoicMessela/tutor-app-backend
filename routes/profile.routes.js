@@ -24,9 +24,9 @@ router.get("/:id", isAuthenticated, async (req, res) => {
     next(err);
   }
 });
-router.delete("/:id", isAuthenticated, async (req, res) => {
+router.delete("/:id", isAuthenticated, async (req, res, next) => {
   try {
-    await User.findByIdAndDelete(req.user.id);
+    await User.findByIdAndDelete(req.params.id);
     res.status(204).json("User Profile has been deleted");
   } catch (err) {
     next(err);
