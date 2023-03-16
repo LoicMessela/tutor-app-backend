@@ -7,7 +7,7 @@ const User = require("../models/User.model");
 
 // GET Courses
 
-router.get('/', async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   const query = {
     title: RegExp(req.query.course, "gi"),
     subject: req.query.subject,
@@ -31,11 +31,12 @@ router.get('/', async (req, res, next) => {
 
     allCourses.forEach((course) => {
       if (favoriteCoursesIds.includes(course.id)) {
-        course.isBookmarked = true;
+        course._doc.isBookmarked = true;
       }
       return course;
     });
 
+    console.log(allCourses);
     res.json(allCourses);
   } catch (error) {
     next(error);
@@ -48,7 +49,7 @@ router.get("/:id", async (req, res, next) => {
   try {
     const oneCourse = await Course.findById(req.params.id);
 
-    res.json({ oneCourse, message: "you got One course !" });
+    res.status(200).json(oneCourse);
   } catch (error) {
     next(error);
   }
@@ -56,9 +57,8 @@ router.get("/:id", async (req, res, next) => {
 
 // Create a Course
 
-router.use(isTeacher)
+router.use(isTeacher);
 router.post("/add", async (req, res, next) => {
-
   try {
     const { title, description, subject } = req.body;
     const createdCourse = await Course.create({

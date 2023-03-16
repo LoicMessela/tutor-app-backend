@@ -5,11 +5,17 @@ const User = require("./../models/User.model");
 const Course = require("./../models/Course.model");
 const isTeacher = require("../middlewares/isTeacher");
 
-
 // Find all the teachers
 router.get("/", async (req, res, next) => {
+  const query = {
+    city: RegExp(req.query.city, "gi"),
+  };
+  if (!query.city) {
+    delete query.city;
+  }
   try {
-    const teacher = await User.find({ isTeacher: true });
+    const teacher = await User.find({ isTeacher: true, city: query.city });
+
     if (!teacher) {
       res.status(404).json({ message: "No teacher found!" });
     }
@@ -68,4 +74,3 @@ router.get("/:id/courses", async (req, res, next) => {
 // });
 
 module.exports = router;
-

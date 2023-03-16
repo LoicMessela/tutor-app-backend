@@ -26,7 +26,6 @@ router.get("/", async (req, res, next) => {
 
 router.post("/:id/add", async (req, res, next) => {
   try {
-
     const foundCourse = await Course.findById(req.params.id);
     if (foundCourse) {
       await FavoriteCourse.findOneAndUpdate(
@@ -46,9 +45,12 @@ router.post("/:id/add", async (req, res, next) => {
 });
 
 router.delete("/:id/remove", isAuthenticated, async (req, res, next) => {
-  const { id } = req.params
+  const { id } = req.params;
   try {
-    removedCourse = await FavoriteCourse.findByIdAndDelete(id);
+    const removedCourse = await FavoriteCourse.findOneAndDelete({
+      course: id,
+      user: req.user._id,
+    });
 
     res.json(removedCourse);
   } catch (error) {
